@@ -19,6 +19,11 @@ class CommentController extends \BaseController {
 	 */
 	public function store()
 	{
+		// If there are no input values, show error response.
+		if( !count( Input::all() ) ) {
+			return Response::json(array('error' => 'No input given' ));
+		}
+		
 		Comment::create(array(
 			'author' => Input::get('author'),
 			'text' => Input::get('text')
