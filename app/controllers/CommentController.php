@@ -19,6 +19,11 @@ class CommentController extends \BaseController {
 	 */
 	public function store()
 	{
+		// Check if input values are available, else return error
+		if( !count( Input::get('author') ) || !count( Input::get('text') ) ) {
+			return Response::json(array('error' => 'Please fill the form.' ));
+		}
+		
 		Comment::create(array(
 			'author' => Input::get('author'),
 			'text' => Input::get('text')
